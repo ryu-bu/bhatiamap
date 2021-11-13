@@ -1,22 +1,22 @@
 from flask_restful import Resource
 from flask import request
-from handlers.bandapi_handler import SqlHandler
+from handlers.musicianapi_handler import SqlHandler
 
-class Bands(Resource):
+class Musicians(Resource):
 
     def get(self):
         return SqlHandler.get_all()
 
     def post(self):
-        newBand = request.get_json()
+        newMucisan = request.get_json()
 
-        if not newBand:
+        if not newMucisan:
             return {"message": "no body received"}, 204
 
-        return SqlHandler.create(newBand)
+        return SqlHandler.create(newMucisan)
 
 
-class Band(Resource):
+class Musician(Resource):
 
     def get(self, id):
 
