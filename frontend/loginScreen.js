@@ -176,7 +176,7 @@ export default function loginScreen({ navigation }) {
 
             if (result.type === "success") {
                 // Then you can use the Google REST API
-                console.log("LoginScreen.js 17 | success, navigating to profile");
+                console.log(result);
                 //navigation.navigate("Profile", { user });
                 return result.accessToken;
             }
