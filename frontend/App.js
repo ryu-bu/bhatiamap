@@ -23,6 +23,7 @@ import {
 //import { Ionicons } from '@expo/vector-icons';
 //import logo from './assets/logo.png'; //this is the amadeus logo that I placed in the assets folder
 //import { generateKey } from 'crypto';
+import * as Google from "expo-google-app-auth";
 
 import Map from './Map';
 import loginScreen from './loginScreen';
@@ -36,6 +37,7 @@ const Stack = createNativeStackNavigator();
 export default class App extends Component {
 
   render() {
+
     return (
 
       <NavigationContainer>
@@ -55,12 +57,3 @@ export default class App extends Component {
     );
   }
 }
-
-
-
-
-
-
-
-
-

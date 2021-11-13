@@ -4,6 +4,7 @@ import React, { Component, useEffect, useState } from 'react';
 //import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 //paste react-navigation folder from node_modules into new project
+import * as Google from "expo-google-app-auth";
 
 
 import {
@@ -165,7 +166,24 @@ export default function loginScreen({ navigation }) {
     const [username, setUsername] = useState(false);
     const [password, setPassword] = useState(false);
 
+    const signInAsync = async () => {
+        console.log("LoginScreen.js 6 | loggin in");
+        try {
+            const result = await Google.logInAsync({
+                iosClientId: "22027224769-ga0ni3sli6iqpvpt42e68ut2q6rv0ml2.apps.googleusercontent.com",
+                scopes: ['profile', 'email']
+            });
 
+            if (result.type === "success") {
+                // Then you can use the Google REST API
+                console.log("LoginScreen.js 17 | success, navigating to profile");
+                //navigation.navigate("Profile", { user });
+                return result.accessToken;
+            }
+        } catch (error) {
+            console.log("LoginScreen.js 19 | error with login", error);
+        }
+    };
     return (
         <View>
             <View style={styles.container}>
@@ -222,7 +240,7 @@ export default function loginScreen({ navigation }) {
             <View style={styles.section2}>
                 <View style={styles.button2}>
                     <Ionicons style={styles.Icon2} name="logo-google" size={20} color="red" />
-                    <Button title="Sign in with Google" color="white" />
+                    <Button title="Sign in with Google" color="white" onPress={signInAsync} />
                 </View>
             </View>
 
