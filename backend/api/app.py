@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint
 from flask_restful import Api
-from resources.Bands import Bands, Band
+from resources.Musicians import Musicians, Musician
+from resources.Login import Login
 from config import Config
 from models import db
 from flask_migrate import Migrate
@@ -12,8 +13,9 @@ def create_app():
 
     current_version = 'v1'
 
-    api.add_resource(Bands, '/bands/')
-    api.add_resource(Band, '/band/<string:id>')
+    api.add_resource(Musicians, '/musicians/')
+    api.add_resource(Musician, '/musician/<string:id>')
+    api.add_resource(Login, '/login')
 
     app.register_blueprint(api_bp, url_prefix='/api/{}'.format(current_version))
 
