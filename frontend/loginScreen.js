@@ -173,7 +173,7 @@ export default function loginScreen({ navigation }) {
     const signInAsync = async () => {
         console.log("LoginScreen.js 6 | loggin in");
         try {
-            console.log(restApiConfig.IOSCLIENTID)
+            console.log(restApiConfig)
             const result = await Google.logInAsync({
                 iosClientId: restApiConfig.IOSCLIENTID,
                 scopes: ['profile', 'email']
@@ -185,13 +185,23 @@ export default function loginScreen({ navigation }) {
 
                 axios.post(restApiConfig.LOGIN_ENDPOINT, result)
                 .then((res) => {
+                    if (res.data["message"] == "existing musician"){
+                        console.log("AHHHHHHHH")
+                        navigation.navigate("Profile Creation Screen", {
+                            email: result.user.email,
+                            name: result.user.name
+                        })
+                    } else {
+                        console.log("Prof AHHHHHHHH")
+                        navigation.navigate("Profile");
+                    }
                     console.log(res.data);
                 })
                 .catch((err) => {
                     console.error(err);
                 });
 
-                navigation.navigate("Profile", { user });
+                
                 return result.accessToken;
             }
         } catch (error) {
