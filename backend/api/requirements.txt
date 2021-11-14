@@ -1,0 +1,18 @@
+# flask
+# flask_restful
+# requests
+# python-dotenv
+# sqlalchemy
+flask_sqlalchemy
+# flask-migrate 
+# alembic 
+# psycopg2g
+
+flask
+flask_restful
+requests
+python-dotenv
+sqlalchemy
+flask-migrate
+alembic
+# psycopg2g
