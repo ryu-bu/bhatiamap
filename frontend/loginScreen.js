@@ -5,6 +5,8 @@ import React, { Component, useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 //paste react-navigation folder from node_modules into new project
 import * as Google from "expo-google-app-auth";
+import axios from 'axios';
+import { restApiConfig } from './config';
 
 
 import {
@@ -166,18 +168,30 @@ export default function loginScreen({ navigation }) {
     const [username, setUsername] = useState(false);
     const [password, setPassword] = useState(false);
 
+    // data = axios.get("")
+
     const signInAsync = async () => {
         console.log("LoginScreen.js 6 | loggin in");
         try {
+            console.log(restApiConfig.IOSCLIENTID)
             const result = await Google.logInAsync({
-                iosClientId: "22027224769-ga0ni3sli6iqpvpt42e68ut2q6rv0ml2.apps.googleusercontent.com",
+                iosClientId: restApiConfig.IOSCLIENTID,
                 scopes: ['profile', 'email']
             });
 
             if (result.type === "success") {
                 // Then you can use the Google REST API
                 console.log(result);
-                //navigation.navigate("Profile", { user });
+
+                axios.post(restApiConfig.LOGIN_ENDPOINT, result)
+                .then((res) => {
+                    console.log(res.data);
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+
+                navigation.navigate("Profile", { user });
                 return result.accessToken;
             }
         } catch (error) {

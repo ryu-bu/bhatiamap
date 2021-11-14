@@ -28,6 +28,7 @@ class SqlHandler():
         }, 200
 
     def create(musician):
+        print(musician)
         musicianModel = MusicianModel(musician['name'], musician['picture'], None, musician['email'], musician['sub'])
 
         try:
