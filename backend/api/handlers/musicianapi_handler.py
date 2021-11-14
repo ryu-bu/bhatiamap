@@ -27,6 +27,15 @@ class SqlHandler():
             "genre": musician.genre
         }, 200
 
+    def update(id, field, key):
+        try:
+            db.session.query(MusicianModel).filter(MusicianModel.email == id).update({field: key})
+            db.session.commit()
+            return {"message": "update success"}, 200
+
+        except Exception:
+            return {"message": "update failed"}, 500
+
     def create(musician):
         print(musician)
         musicianModel = MusicianModel(musician['name'], musician['picture'], None, musician['email'], musician['sub'])

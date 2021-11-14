@@ -15,6 +15,14 @@ class Musicians(Resource):
 
         return SqlHandler.create(newMucisan)
 
+    def put(self):
+        r = request.get_json()
+        id = r["email"]
+        field = r["field"]
+        key = r["key"]
+
+        return SqlHandler.update(id, field, key)
+
 
 class Musician(Resource):
 
