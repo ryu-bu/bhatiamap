@@ -42,6 +42,15 @@ const styles = StyleSheet.create({
         padding: 10,
         height: 60,
     },
+    searchbtn: {
+        position: 'absolute', top: 650, left: 75, right: 0, bottom: 0,
+        color: "transparent",
+        width: "60%",
+        borderWidth: 1,
+        padding: 10,
+        height: 60,
+        fontSize: 20
+    },
     Coord1: {
         position: 'absolute', top: 200, left: 20, right: 0, bottom: 0,
         color: "transparent",
@@ -97,6 +106,20 @@ export default function map({ navigation }) {
                     title="<--"
                     onPress={() => navigation.navigate('Login Screen')}
                 />
+            </View>
+            <View style={styles.searchbtn}>
+                <Button color="black"
+                    title="Search for Musicians"
+                //onPress={() => navigation.navigate('Login Screen')}
+                />
+            </View>
+
+
+            <View>
+                <Text style={styles.Coord1}>
+
+                </Text>
+
             </View>
 
 
