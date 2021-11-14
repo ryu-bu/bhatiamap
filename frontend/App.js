@@ -27,6 +27,7 @@ import {
 import Map from './Map';
 import loginScreen from './loginScreen';
 import profileCreate from './profileCreate';
+import gigCreate from './gigCreate';
 import { color } from 'react-native-reanimated';
 import { createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -52,6 +53,7 @@ export default class App extends Component {
           <Stack.Screen name="Login Screen" component={loginScreen} />
           <Stack.Screen name="Map Screen" component={Map} />
           <Stack.Screen name="Profile Creation Screen" component={profileCreate} />
+          <Stack.Screen name="Gig Addition Screen" component={gigCreate} />
         </Stack.Navigator>
       </NavigationContainer>
 

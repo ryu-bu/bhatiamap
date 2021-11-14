@@ -1,5 +1,3 @@
-//James Wasson
-
 import React, { Component, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -20,6 +18,7 @@ import {
 } from 'react-native';
 import { stringLiteral } from '@babel/types';
 import { Ionicons } from '@expo/vector-icons';
+import { restApiConfig } from './config';
 
 
 
@@ -43,24 +42,20 @@ const styles = StyleSheet.create({
 
 });
 
-function move(val){
-    const { Pool, Client } = require("pg");
-
-    const pool = new Pool({
-    name: "temp1",
-    email: "temp@temp",
-    genre: "temp",
-    database: "test",
-    password: "1",
-    port: "1"
-    });
-
-    pool.query("UPDATE musicians SET genre = " + val + " where email = " )        
+function move(val, email, name){
+  const res = await axios.put(restApiConfig.LOGIN_ENDPOINT, { 'email': email, 'field': 'genre', 'key': val });
+  console.log(val)
+  console.log(name)
+  navigation.navigate("Gig Addition Screen", {
+    email: result.user.email,
+    genre: result.user.genre
+})
 }
 
-export default function profileCreate(navigation) {
+export default function profileCreate({route, navigation}) {
     //const [username, setUsername] = useState(false);
     //const [password, setPassword] = useState(false);
+    const {email, name} = route.params;
     const [selectedValue, setSelectedValue] = useState("Rock");
     return (
       <View style={styles.container}>
@@ -76,7 +71,7 @@ export default function profileCreate(navigation) {
         </Picker>
         
         <View style={styles.buttonView}>
-            <Button title="Confirm" color="gray" onPress={move(picker.value)} />
+            <Button title="Confirm" color="gray" onPress={move(selectedValue, email, name)} />
         </View>
         
       </View>

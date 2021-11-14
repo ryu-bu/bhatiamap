@@ -187,7 +187,10 @@ export default function loginScreen({ navigation }) {
                 .then((res) => {
                     if (res.data["message"] == "existing musician"){
                         console.log("AHHHHHHHH")
-                        navigation.navigate("Profile Creation Screen")
+                        navigation.navigate("Profile Creation Screen", {
+                            email: result.user.email,
+                            name: result.user.name
+                        })
                     } else {
                         console.log("Prof AHHHHHHHH")
                         navigation.navigate("Profile");
