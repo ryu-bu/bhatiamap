@@ -1,5 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import axios from 'axios';
 
 
 import {
@@ -40,8 +41,18 @@ const styles = StyleSheet.create({
       },
   });
   
+async function gig_update({text1, email, genre, text2, text3, text4}){
+    const res = await axios.put(restApiConfig.GIG_ENDPOINT, {
+      'name': text1, 'email': email, 'genre': genre, 'longitude':text2, 'latitude':text3, 'time': text4 });
+    // console.log(val)
+    // console.log(name)
+  //   navigation.navigate("Gig Addition Screen", {
+  //     email: email,
+  //     genre: val
+  // })
+  }
 
-export default function profileCreate({route, navigation}) {
+export default async function profileCreate({route, navigation}) {
     
     const {email, genre} = route.params;
 
@@ -75,8 +86,7 @@ export default function profileCreate({route, navigation}) {
           value={text4}
           placeholder= "Time"
         />
-        <Button title="Login" color="red" onPress={await axios.put(restApiConfig.GIG_ENDPOINT, {
-             'name': text1, 'email': email, 'genre': genre, 'longitude':text2, 'latitude':text3, 'time': text4 })}/>
+        <Button title="Login" color="red" onPress={gig_update(text1, email, genre, text2, text3, text4)}/>
       </SafeAreaView>
   );
 };

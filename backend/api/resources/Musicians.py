@@ -17,6 +17,7 @@ class Musicians(Resource):
 
     def put(self):
         r = request.get_json()
+        print(r)
         id = r["email"]
         field = r["field"]
         key = r["key"]

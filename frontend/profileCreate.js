@@ -1,5 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import axios from 'axios';
 
 
 import {
@@ -42,15 +43,34 @@ const styles = StyleSheet.create({
 
 });
 
-function move(val, email, name){
-  const res = await axios.put(restApiConfig.LOGIN_ENDPOINT, { 'email': email, 'field': 'genre', 'key': val });
-  console.log(val)
-  console.log(name)
-  navigation.navigate("Gig Addition Screen", {
-    email: result.user.email,
-    genre: result.user.genre
-})
-}
+// async function move({val, email, name, navigation}){
+//   const res = await axios.put(restApiConfig.MUSICIAN_ENDPOINT, { 'email': email, 'field': 'genre', 'key': val });
+// //   console.log(val)
+// //   console.log(name)
+//   navigation.navigate("Gig Addition Screen", {
+//     email: email,
+//     genre: val
+// })
+// }
+
+const move = async ({val, email, name, navigation}) => {
+    console.log("LoginScreen.js 6 | loggin in");
+    try {
+        axios.put(restApiConfig.MUSICIAN_ENDPOINT, { 'email': "ryu74@bu.edu", 'field': 'genre', 'key': "rock" })
+        .then((res) => {
+            console.log(res.data);
+            navigation.navigate("Gig Addition Screen", {
+                email: "email",
+                genre: "selectedValue"
+            });
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    } catch (error) {
+        console.log("LoginScreen.js 19 | error with login", error);
+    }
+};
 
 export default function profileCreate({route, navigation}) {
     //const [username, setUsername] = useState(false);
@@ -71,7 +91,7 @@ export default function profileCreate({route, navigation}) {
         </Picker>
         
         <View style={styles.buttonView}>
-            <Button title="Confirm" color="gray" onPress={move(selectedValue, email, name)} />
+            <Button title="Confirm" color="gray" onPress={move(selectedValue, email, name, navigation)} />
         </View>
         
       </View>
