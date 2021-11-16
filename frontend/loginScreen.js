@@ -181,19 +181,20 @@ export default function loginScreen({ navigation }) {
 
             if (result.type === "success") {
                 // Then you can use the Google REST API
-                console.log(result);
-
-                axios.post(restApiConfig.LOGIN_ENDPOINT, result)
-                .then((res) => {
-                    if (res.data["message"] == "existing musician"){
-                        console.log("AHHHHHHHH")
-                        navigation.navigate("Profile Creation Screen", {
+                console.log("Successful Login");
+                navigation.navigate("Profile Creation Screen", {
                             email: result.user.email,
                             name: result.user.name
                         })
+                axios.post(restApiConfig.LOGIN_ENDPOINT, result)
+                .then((res) => {
+                    print(res)
+                    if (res.data["message"] == "existing musician"){
+                        console.log("AHHHHHHHH")
+                        
                     } else {
                         console.log("Prof AHHHHHHHH")
-                        navigation.navigate("Profile");
+                        navigation.navigate("Profile Creation");
                     }
                     console.log(res.data);
                 })
@@ -205,7 +206,7 @@ export default function loginScreen({ navigation }) {
                 return result.accessToken;
             }
         } catch (error) {
-            console.log("LoginScreen.js 19 | error with login", error);
+            console.log("error with login", error);
         }
     };
     return (

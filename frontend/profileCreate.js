@@ -53,30 +53,39 @@ const styles = StyleSheet.create({
 // })
 // }
 
-const move = async ({val, email, name, navigation}) => {
-    console.log("LoginScreen.js 6 | loggin in");
-    try {
-        axios.put(restApiConfig.MUSICIAN_ENDPOINT, { 'email': "ryu74@bu.edu", 'field': 'genre', 'key': "rock" })
-        .then((res) => {
-            console.log(res.data);
-            navigation.navigate("Gig Addition Screen", {
-                email: "email",
-                genre: "selectedValue"
-            });
-        })
-        .catch(err => {
-            console.log(err)
-        });
-    } catch (error) {
-        console.log("LoginScreen.js 19 | error with login", error);
-    }
-};
 
 export default function profileCreate({route, navigation}) {
     //const [username, setUsername] = useState(false);
     //const [password, setPassword] = useState(false);
     const {email, name} = route.params;
     const [selectedValue, setSelectedValue] = useState("Rock");
+
+    const move = async () => {
+      console.log("Prof Create movement");
+      console.log(email)
+      navigation.navigate("Gig Addition Screen", {
+        email: email,
+        genre: selectedValue
+    });
+      console.log("What");
+      try {
+          axios.put(restApiConfig.MUSICIAN_ENDPOINT, { 'email': "ryu74@bu.edu", 'field': 'genre', 'key': "rock" })
+          .then((res) => {
+              console.log(res.data);
+              navigation.navigate("Gig Addition Screen", {
+                  email: "email",
+                  genre: "selectedValue"
+              });
+          })
+          .catch(err => {
+              console.log(err)
+          });
+      } catch (error) {
+          console.log("Error with genre creation", error);
+      }
+  };
+
+
     return (
       <View style={styles.container}>
         <Picker
@@ -91,11 +100,9 @@ export default function profileCreate({route, navigation}) {
         </Picker>
         
         <View style={styles.buttonView}>
-            <Button title="Confirm" color="gray" onPress={move(selectedValue, email, name, navigation)} />
+            <Button title="Confirm" color="gray" onPress={move} />
         </View>
         
       </View>
-
-      
     );
 };

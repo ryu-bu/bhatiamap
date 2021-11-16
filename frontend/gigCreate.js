@@ -41,9 +41,9 @@ const styles = StyleSheet.create({
       },
   });
   
-async function gig_update({text1, email, genre, text2, text3, text4}){
+async function gig_update({gigName, email, genre, longitude, latitude, time}){
     const res = await axios.put(restApiConfig.GIG_ENDPOINT, {
-      'name': text1, 'email': email, 'genre': genre, 'longitude':text2, 'latitude':text3, 'time': text4 });
+      'name': gigName, 'email': email, 'genre': genre, 'longitude':longitude, 'latitude':latitude, 'time': time });
     // console.log(val)
     // console.log(name)
   //   navigation.navigate("Gig Addition Screen", {
@@ -52,41 +52,44 @@ async function gig_update({text1, email, genre, text2, text3, text4}){
   // })
   }
 
-export default async function profileCreate({route, navigation}) {
+export default function profileCreate({route, navigation}) {
     
     const {email, genre} = route.params;
+    console.log(genre);
+    //onPress={gig_update(gigName, email, genre, longitude, latitude, time)}
 
-    const [text1, onChangeText] = React.useState(null);
-    const [text2, onChangeText2] = React.useState(null);
-    const [text3, onChangeText3] = React.useState(null);
-    const [text4, onChangeText4] = React.useState(null);
+    const [gigName, onChangeName] = React.useState(null);
+    const [longitude, onChangelongitude] = React.useState(null);
+    const [latitude, onChangelatitude] = React.useState(null);
+    const [time, onChangetime] = React.useState(null);
     return (
     <SafeAreaView>
         <TextInput
           style={styles.input}
-          onChangeText={onChangeText}
-          value={text1}
+          onChangeText={onChangeName}
+          value={gigName}
           placeholder= "Name of Gig"
         />
         <TextInput
           style={styles.input}
-          onChangeText={onChangeText2}
-          value={text2}
+          onChangeText={onChangelongitude}
+          value={longitude}
           placeholder= "Longitude"
         />
         <TextInput
           style={styles.input}
-          onChangeText={onChangeText3}
-          value={text3}
+          onChangeText={onChangelatitude}
+          value={latitude}
           placeholder= "Latitude"
         />
         <TextInput
           style={styles.input}
-          onChangeText={onChangeText4}
-          value={text4}
+          onChangeText={onChangetime}
+          value={time}
           placeholder= "Time"
         />
-        <Button title="Login" color="red" onPress={gig_update(text1, email, genre, text2, text3, text4)}/>
+        <Button title="Login" color="red"/>
+        
       </SafeAreaView>
   );
 };
