@@ -25,6 +25,7 @@ import {
 //import { generateKey } from 'crypto';
 
 import Map from './Map';
+import SearchScreen from './Search';
 import loginScreen from './loginScreen';
 import { color } from 'react-native-reanimated';
 import { createSwitchNavigator } from 'react-navigation';
@@ -49,6 +50,7 @@ export default class App extends Component {
           }}
         >
           <Stack.Screen name="Login Screen" component={loginScreen} />
+          <Stack.Screen name="Search Screen" component={SearchScreen} />
           <Stack.Screen name="Map Screen" component={Map} />
         </Stack.Navigator>
       </NavigationContainer>

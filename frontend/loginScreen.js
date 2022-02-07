@@ -216,7 +216,7 @@ export default function loginScreen({ navigation }) {
             <View>
                 <View style={styles.loginbtn}>
                     <Button title="Login" color="white"
-                        onPress={() => navigation.navigate('Map Screen')}
+                        onPress={() => navigation.navigate('Search Screen')}
                     />
 
                 </View>
